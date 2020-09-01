@@ -60,6 +60,7 @@ frame-system = {git = "https://github.com/paritytech/substrate", branch = "maste
 frame-system-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
 pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
 pallet-treasury = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
+sudo = { package = "pallet-sudo", git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
 pallet-vesting = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
 pallet-utility = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
 
@@ -139,6 +140,7 @@ std = [
 	"sp-session/std",
 	"pallet-randomness-collective-flip/std",
 	"runtime-common/std",
+	"sudo/std",
 	"pallet-vesting/std",
 	"pallet-utility/std",
 ]
