@@ -122,7 +122,7 @@ impl Filter<Call> for BaseFilter {
 			Call::Session(_) | Call::FinalityTracker(_) | Call::Grandpa(_) | Call::ImOnline(_) |
 			Call::AuthorityDiscovery(_) |
 			Call::Utility(_) | Call::Claims(_) | Call::Vesting(_) | Call::Sudo(_) |
-			Call::Identity(_) | Call::Proxy(_) | Call::Multisig(_) |
+			Call::Identity(_) | Call::Proxy(_) | Call::Multisig(_) 
 		    => true,
 		}
 	}
@@ -949,7 +949,7 @@ construct_runtime! {
 
 		// Sudo. Last module. Usable initially, but removed once governance enabled.
 		Sudo: sudo::{Module, Call, Storage, Config<T>, Event<T>},
-		
+
 		// Old spot for the purchase pallet. Can be replaced later by a new pallet.
 		DummyPurchase: dummy::<Instance4>::{Module, Call, Event<T>},
 
