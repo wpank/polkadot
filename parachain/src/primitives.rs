@@ -124,7 +124,19 @@ impl Id {
 	}
 
 	/// Returns `true` if this parachain runs with system-level privileges.
+	/// Use IsSystem instead.
+	#[deprecated]
 	pub fn is_system(&self) -> bool { self.0 < USER_INDEX_START }
+}
+
+pub trait IsSystem {
+	fn is_system(&self) -> bool;
+}
+
+impl IsSystem for Id {
+	fn is_system(&self) -> bool {
+		self.0 < USER_INDEX_START
+	}
 }
 
 impl sp_std::ops::Add<u32> for Id {
@@ -236,6 +248,11 @@ pub struct ValidationParams {
 	pub block_data: BlockData,
 	/// The current relay-chain block number.
 	pub relay_chain_height: RelayChainBlockNumber,
+	/// The MQC head for the DMQ.
+	///
+	/// The DMQ MQC head will be used by the validation function to authorize the downward messages
+	/// passed by the collator.
+	pub dmq_mqc_head: Hash,
 	/// The list of MQC heads for the inbound HRMP channels paired with the sender para ids. This
 	/// vector is sorted ascending by the para id and doesn't contain multiple entries with the same
 	/// sender.
