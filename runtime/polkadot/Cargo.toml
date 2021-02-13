@@ -59,10 +59,9 @@ frame-system = {git = "https://github.com/paritytech/substrate", branch = "polka
 frame-system-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
 pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
 pallet-treasury = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
-sudo = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
+sudo = { package = "pallet-sudo", git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
 pallet-vesting = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
 pallet-utility = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false }
-
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false, optional = true }
 frame-system-benchmarking = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false, optional = true }
 pallet-offences-benchmarking = { git = "https://github.com/paritytech/substrate", branch = "polkadot-release-v0.8.27", default-features = false, optional = true }

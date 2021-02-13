@@ -755,7 +755,7 @@ impl pallet_multisig::Config for Runtime {
 	type WeightInfo = weights::pallet_multisig::WeightInfo<Runtime>;
 }
 
-impl sudo::Trait for Runtime {
+impl sudo::Config for Runtime {
 	type Event = Event;
 	type Call = Call;
 }

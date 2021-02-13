@@ -773,6 +773,11 @@ impl pallet_vesting::Config for Runtime {
 	type WeightInfo = weights::pallet_vesting::WeightInfo<Runtime>;
 }
 
+impl sudo::Config for Runtime {
+	type Event = Event;
+	type Call = Call;
+}
+
 parameter_types! {
 	// One storage item; key size 32, value size 8; .
 	pub const ProxyDepositBase: Balance = deposit(1, 8);
@@ -792,6 +797,7 @@ pub enum ProxyType {
 	Governance,
 	Staking,
 	IdentityJudgement,
+	SudoBalances,
 }
 impl Default for ProxyType { fn default() -> Self { Self::Any } }
 impl InstanceFilter<Call> for ProxyType {
@@ -854,7 +860,12 @@ impl InstanceFilter<Call> for ProxyType {
 			ProxyType::IdentityJudgement => matches!(c,
 				Call::Identity(pallet_identity::Call::provide_judgement(..)) |
 				Call::Utility(..)
-			)
+			),
+			ProxyType::SudoBalances => match c {
+				Call::Sudo(sudo::Call::sudo(ref x)) => matches!(x.as_ref(), &Call::Balances(..)),
+				Call::Utility(..) => true,
+				_ => false,
+			},
 		}
 	}
 	fn is_superset(&self, o: &Self) -> bool {
@@ -1174,6 +1185,9 @@ construct_runtime! {
 
 		// Multisig module. Late addition.
 		Multisig: pallet_multisig::{Module, Call, Storage, Event<T>} = 31,
+
+		// Sudo. Last module. Usable initially, but removed once governance enabled.
+		Sudo: sudo::{Module, Call, Storage, Config<T>, Event<T>} = 35,
 	}
 }
 

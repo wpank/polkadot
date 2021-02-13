@@ -595,6 +595,9 @@ fn kusama_staging_testnet_config_genesis(wasm_binary: &[u8]) -> kusama::GenesisC
 			vesting: vec![],
 		}),
 		pallet_vesting: Some(kusama::VestingConfig { vesting: vec![] }),
+		sudo: Some(kusama::SudoConfig {
+			key: endowed_accounts[0].clone(),
+		}),
 	}
 }
 
@@ -1041,7 +1044,7 @@ pub fn kusama_testnet_genesis(
 		ValidatorId,
 		AuthorityDiscoveryId,
 	)>,
-	_root_key: AccountId,
+	root_key: AccountId,
 	endowed_accounts: Option<Vec<AccountId>>,
 ) -> kusama::GenesisConfig {
 	let endowed_accounts: Vec<AccountId> = endowed_accounts.unwrap_or_else(testnet_accounts);
@@ -1118,6 +1121,9 @@ pub fn kusama_testnet_genesis(
 			vesting: vec![],
 		}),
 		pallet_vesting: Some(kusama::VestingConfig { vesting: vec![] }),
+		sudo: Some(kusama::SudoConfig {
+			key: root_key,
+		}),
 	}
 }
 
